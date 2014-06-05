@@ -1,0 +1,10 @@
+<!--The main client window.  Displays a list of sinks, which have routes within it.
+-->
+<template name="clientview">
+	<h1>this is the client view.</h1>
+	<ul>
+		{{#each SinkList}}
+			<li>{{> clientsinkview}}</li>
+		{{/each}}
+	</ul>
+</template>
