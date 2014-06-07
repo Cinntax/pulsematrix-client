@@ -1,13 +1,13 @@
 //Once we move these collections into pulseaudio,
 //it will have to have one route per sink/source.
+//Sinks = new SinkCollection();
+//Sources = new SourceCollection();
+//Routes = new PARouteCollection();
 
-Sinks = new Meteor.Collection("sinks");
-Routes = new Meteor.Collection("routes");
-
-if (Meteor.isClient) {
-	Handlebars.registerHelper('routes', function(sinkName) {
-		return Routes.find({sinkname: sinkName});
-	});
+//if (Meteor.isClient) {
+	//Handlebars.registerHelper('routehelper', function(sinkName) {
+	//	return Routes.find({sinkname: sinkName});
+//	});
 
 //  Template.hello.greeting = function () {
 //    return "Welcome to test.";
@@ -20,10 +20,12 @@ if (Meteor.isClient) {
 //        console.log("You pressed the button");
 //    }
 //  });
-}
+//}
 
 if (Meteor.isServer) {
+		Meteor.setInterval(RefreshPA, 5000);
   Meteor.startup(function () {
+			RefreshPA();
     // code to run on server at startup
 //		var test1 = new Sink();
 //		test1.name = "sink number 2";
