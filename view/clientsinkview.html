@@ -6,8 +6,8 @@ Potentially there could even be a fader rendered down the road which could contr
 <template name="clientsinkview">
   <h1>{{name}}</h1>
 	<ul>
-	  {{#each SourceList}}
-      <li>{{> clientsourceview}}</li>
+		{{#each routemap name}}
+      <li>{{> clientrouteview}}</li>
     {{/each}}
 	</ul>
 </template>

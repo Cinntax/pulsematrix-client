@@ -23,7 +23,7 @@
 //}
 
 if (Meteor.isServer) {
-		Meteor.setInterval(RefreshPA, 5000);
+		Meteor.setInterval(RefreshPA, 50000);
   Meteor.startup(function () {
 			RefreshPA();
     // code to run on server at startup
