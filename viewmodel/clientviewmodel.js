@@ -8,12 +8,15 @@ if(Meteor.isClient){
 	};
 
 	Handlebars.registerHelper('routemap', function(sinkName) {
-		console.log('helper fired..');	
 		routemap = new Array();
 		possibleRoutes = PASources.find({type: 'module-null-sink.c'}); 
 		possibleRoutes.forEach(function(source) {
 			newRouteVM = new RouteViewModel();
-
+			if(source.friendlyName)
+				newRouteVM.friendlyName = source.friendlyName;
+			else
+				newRouteVM.friendlyName = source.name;
+	
 			newRouteVM.source = source.name;
 			newRouteVM.sink = sinkName;	
 			//For each source, see if we find it in our routes list.
