@@ -1,0 +1,18 @@
+<!--This will be a view of a sink while controlling the server.
+This should look a little bit like one channel of a sound board.
+There should be a list of routeviews here to mute/unmute each potential source
+Potentially there could even be a fader rendered down the road which could control the volume of the sink.
+-->
+<template name="clientsinkview">
+	{{#if friendlyName}}
+  <h1>{{friendlyName}}</h1>
+	{{else}}
+		<h1>{{name}}</h1>
+	{{/if}}
+
+	<ul>
+		{{#each routemap name}}
+      <li>{{> clientrouteview}}</li>
+    {{/each}}
+	</ul>
+</template>
