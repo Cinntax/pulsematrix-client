@@ -6,13 +6,24 @@ if(Meteor.isClient){
 	Template.clientsinkview.SourceList = function() {
 		return PASources.find({type: 'module-null-sink.c'});
 	};
+	
+	Template.clientview.visible = function() {
+		viewmode = Session.get('viewmode');
+		if(!viewmode)
+		{
+			Session.set('viewmode');
+			return true;
+		}
+		else
+			return viewmode == 'client';
+	}
 
 	Handlebars.registerHelper('routemap', function(sinkName) {
 		routemap = new Array();
 		possibleRoutes = PASources.find({type: 'module-null-sink.c'}); 
 		possibleRoutes.forEach(function(source) {
 			newRouteVM = new RouteViewModel();
-			if(source.friendlyName)
+			if(source.friendlyName != 'none')
 				newRouteVM.friendlyName = source.friendlyName;
 			else
 				newRouteVM.friendlyName = source.name;

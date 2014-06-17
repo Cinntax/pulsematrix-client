@@ -4,15 +4,14 @@ There should be a list of routeviews here to mute/unmute each potential source
 Potentially there could even be a fader rendered down the road which could control the volume of the sink.
 -->
 <template name="clientsinkview">
-	{{#if friendlyName}}
-  <h1>{{friendlyName}}</h1>
-	{{else}}
-		<h1>{{name}}</h1>
-	{{/if}}
-
-	<ul>
-		{{#each routemap name}}
-      <li>{{> clientrouteview}}</li>
-    {{/each}}
-	</ul>
+		<ul id="routelist">
+			{{#each routemap name}}
+      	<li class="route">{{> clientrouteview}}</li>
+    	{{/each}}
+		</ul>
+	  {{#if friendlyName}}
+      {{friendlyName}}
+    {{else}}
+      {{name}}
+    {{/if}}
 </template>
