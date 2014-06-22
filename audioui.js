@@ -1,8 +1,8 @@
 //Once we move these collections into pulseaudio,
 //it will have to have one route per sink/source.
-//Sinks = new SinkCollection();
-//Sources = new SourceCollection();
-//Routes = new PARouteCollection();
+Sinks = new Meteor.Collection('sinks');
+Sources = new Meteor.Collection('sources');
+Routes = new Meteor.Collection('routes');
 
 //if (Meteor.isClient) {
 	//Handlebars.registerHelper('routehelper', function(sinkName) {

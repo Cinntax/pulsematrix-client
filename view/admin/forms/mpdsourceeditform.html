@@ -1,0 +1,21 @@
+<template name="mpdsourceeditform">
+		<h1>Edit Source Details</h1>
+		<div>
+			<label>Name</label>
+			<input id="mpdsource_name" value="{{ActiveObject.name}}" />
+		</div>
+		<div>
+			<label>MPD Config File Path</label>
+			<input id="mpdsource_mpdconf" value="{{ActiveObject.mpdconf}}" />
+		</div>
+		<div>
+      <label>Pulseaudio Name</label>
+      <input id="mpdsource_paname" value="{{ActiveObject.paName}}" />
+    </div>
+		<div>
+			<label>Active?</label>
+			<input id="mpdsource_enabled" type="checkbox" checked="{{ActiveObject.enabled}}" />
+		</div>
+		<button id="save">Save</button>
+		<button id="delete">Delete</button>
+</template>

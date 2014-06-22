@@ -1,7 +1,19 @@
 <template name="adminview">
-	<h1>this is the admin view.</h1>
+	<h1>Administration</h1>
 	{{#if visible}}
-  	{{> adminsinkview}}
-		{{> adminsourceview}}
+		<section id="objecttree">
+			{{> admintreeview}}
+		</section>
+		<section id="editform">
+			{{#if formvisible 'local'}}
+				{{> localsinkeditform}}
+			{{/if}}
+			{{#if formvisible 'airplay'}}
+				{{> airplaysourceeditform}}
+			{{/if}}
+			{{#if formvisible 'mpd'}}
+        {{> mpdsourceeditform}}
+      {{/if}}
+		</section>
 	{{/if}}
 </template>

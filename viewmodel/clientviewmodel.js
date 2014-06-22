@@ -1,10 +1,10 @@
 if(Meteor.isClient){
 	Template.clientview.SinkList = function() {
-		return PASinks.find({type: 'module-remap-sink.c'});
+		return Sinks.find({enabled: true});
 	};
 	
 	Template.clientsinkview.SourceList = function() {
-		return PASources.find({type: 'module-null-sink.c'});
+		return Sources.find({enabled: true});
 	};
 	
 	Template.clientview.visible = function() {
@@ -18,20 +18,18 @@ if(Meteor.isClient){
 			return viewmode == 'client';
 	}
 
-	Handlebars.registerHelper('routemap', function(sinkName) {
+	Handlebars.registerHelper('routemap', function(sinkName, sinkPAIndex) {
 		routemap = new Array();
-		possibleRoutes = PASources.find({type: 'module-null-sink.c'}); 
+		possibleRoutes = Sources.find({enabled: true}); 
 		possibleRoutes.forEach(function(source) {
 			newRouteVM = new RouteViewModel();
-			if(source.friendlyName != 'none')
-				newRouteVM.friendlyName = source.friendlyName;
-			else
-				newRouteVM.friendlyName = source.name;
-	
-			newRouteVM.source = source.name;
+			newRouteVM.friendlyName = source.name;
+			newRouteVM.notavailable = (source.paIndex == -1) || (sinkPAIndex == -1);	
+			console.log(sinkPAIndex);	
+			newRouteVM.source = source.paName;
 			newRouteVM.sink = sinkName;	
 			//For each source, see if we find it in our routes list.
-			route = PARoutes.findOne({sink: sinkName, source: source.name})
+			route = Routes.findOne({sink: sinkName, source: source.paName})
 			if(route)
 			{
 				newRouteVM.active = 1;
@@ -43,11 +41,13 @@ if(Meteor.isClient){
 		return routemap;
 	});
 
-	Handlebars.registerHelper('routestyle', function(index) {
-		if(index > 0)
+	Handlebars.registerHelper('routestyle', function(index, notavailable) {
+		if(notavailable)
+			return 'notavailable';
+		else if (index > 0)
 			return 'active';
 		else
-			return 'inactive';	
+			return 'inactive';
 	});
 
 	Template.clientrouteview.events({

@@ -1,6 +1,7 @@
 /* CSS declarations go here */
 html {
 	background-color:lightgrey;
+	font-family:arial;
 }
 
 .clientbutton {
@@ -52,4 +53,22 @@ html {
 
 .route {
 	margin-bottom:10px;
+}
+
+#objecttree {
+	border-style:solid;
+	border-width:1px;
+	width:20%;
+	float:left;
+}
+
+#editform {
+	border-style:solid;
+	border-width:1px;
+	width:75%;
+	float: left;
+}
+
+label {
+	width:150px;
 }

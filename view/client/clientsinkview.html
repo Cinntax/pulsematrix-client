@@ -5,13 +5,9 @@ Potentially there could even be a fader rendered down the road which could contr
 -->
 <template name="clientsinkview">
 		<ul id="routelist">
-			{{#each routemap name}}
+			{{#each routemap paName paIndex}}
       	<li class="route">{{> clientrouteview}}</li>
     	{{/each}}
 		</ul>
-	  {{#if friendlyName}}
-      {{friendlyName}}
-    {{else}}
-      {{name}}
-    {{/if}}
+    {{name}}
 </template>
