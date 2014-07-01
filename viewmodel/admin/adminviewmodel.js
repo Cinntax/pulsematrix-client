@@ -6,7 +6,7 @@ if(Meteor.isClient){
 	Handlebars.registerHelper('formvisible', function(typeName) {
 		selectedObj = Session.get('adminSelectedObject');
 		if(selectedObj)
-			return selectedObj.minorTypeName === typeName;
+			return selectedObj.majorTypeName === typeName;
 		else
 			return false;
 	});	

@@ -15,6 +15,7 @@ if(Meteor.isClient){
 	Template.admintreeview.events({
 		'click li': function(event) {
 			Session.set('adminSelectedObject', this);
+			Meteor.call('SourceStatus', this);
 		},
 		'click #newlocalsink': function(event) {
 			newSink = new LocalSink();

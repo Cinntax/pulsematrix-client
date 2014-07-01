@@ -5,15 +5,12 @@
 			{{> admintreeview}}
 		</section>
 		<section id="editform">
-			{{#if formvisible 'local'}}
+			{{#if formvisible 'sink'}}
 				{{> localsinkeditform}}
 			{{/if}}
-			{{#if formvisible 'airplay'}}
-				{{> airplaysourceeditform}}
+			{{#if formvisible 'source'}}
+				{{> sourceform}}
 			{{/if}}
-			{{#if formvisible 'mpd'}}
-        {{> mpdsourceeditform}}
-      {{/if}}
 		</section>
 	{{/if}}
 </template>

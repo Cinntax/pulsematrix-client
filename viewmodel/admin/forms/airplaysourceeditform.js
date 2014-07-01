@@ -23,16 +23,18 @@ if(Meteor.isClient){
 if(Meteor.isServer){
 	Meteor.methods({
 		SavePASource: function(source){
-		  //Call out to the pa library to create the source.
-			if(source.paIndex == -1)
-			{	
-				paSource = CreateSource(source)
-				source = paSource;	
-			}
-			if(source.paIndex > -1 && source.servicePath == '')
-			{
-				CreateNewAirplayService(source);
-			}
+			//Call out to the service library to create the service.
+			//We'll want to be sure that we're not still running the service.
+			//This will overwrite	the existing file.	
+		  servicePath =	CreateNewAirplayService(source);
+			source.servicePath = servicePath;
+
+			//Call out to the pa library to create the source.
+      //if(source.paIndex == -1)
+      //{ 
+      //  paSource = CreateSource(source)
+    //    source = paSource;  
+  //    }
 			Sources.update({_id: source._id}, source);
 		}
 	});	

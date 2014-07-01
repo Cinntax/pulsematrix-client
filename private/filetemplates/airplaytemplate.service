@@ -1,7 +1,7 @@
 [Unit]
-Description=Airplay Source
+Description=Airplay Source- {{airplayName}}
 
 [Service]
 Type=simple
-User=mpd
+User={{user}}
 ExecStart=/usr/bin/shairport -a "{{airplayName}}" -p {{airplayPort}} -m tinysvcmdns -o pulse -- -s "{{paName}}"
