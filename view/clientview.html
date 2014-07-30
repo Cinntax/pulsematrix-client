@@ -1,11 +1,10 @@
 <!--The main client window.  Displays a list of sinks, which have routes within it.
+A sink is like one channel in a mixing board.
 -->
 <template name="clientview">
-	{{#if visible}}
 	<ul id="sinklist">
 		{{#each SinkList}}
 			<li class="sink">{{> clientsinkview}}</li>
 		{{/each}}
 	</ul>
-	{{/if}}
 </template>

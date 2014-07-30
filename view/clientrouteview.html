@@ -3,5 +3,5 @@ The rendering here will be simple- something to indicate which source
 Is being controlled, and something to indicate whether it's active or not.
 -->
 <template name="clientrouteview">
-	<button disabled="{{notavailable}}" class="clientbutton {{routestyle index notavailable}}" sink="{{sink}}" source="{{source}}" index="{{index}}">{{friendlyName}}</button>
+	<button class="clientbutton {{routestyle index}}" sink="{{sinkName}}" source="{{sourceName}}" index="{{index}}">{{sourceName}}</button>
 </template>

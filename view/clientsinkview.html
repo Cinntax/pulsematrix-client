@@ -4,10 +4,10 @@ There should be a list of routeviews here to mute/unmute each potential source
 Potentially there could even be a fader rendered down the road which could control the volume of the sink.
 -->
 <template name="clientsinkview">
-		<ul id="routelist">
-			{{#each routemap paName paIndex}}
-      	<li class="route">{{> clientrouteview}}</li>
+		<!--<ul id="routelist">-->
+			{{#each routemap sinkName}}
+      	<div class="row">{{> clientrouteview}}</div>
     	{{/each}}
-		</ul>
-    {{name}}
+		<!-- </ul> -->
+    {{sinkName}}
 </template>

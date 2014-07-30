@@ -1,50 +1,30 @@
 if(Meteor.isClient){
 	Template.clientview.SinkList = function() {
-		return Sinks.find({enabled: true});
+		return Sinks.find({});
 	};
-	
-	Template.clientsinkview.SourceList = function() {
-		return Sources.find({enabled: true});
-	};
-	
-	Template.clientview.visible = function() {
-		viewmode = Session.get('viewmode');
-		if(!viewmode)
-		{
-			Session.set('viewmode');
-			return true;
-		}
-		else
-			return viewmode == 'client';
-	}
 
-	Handlebars.registerHelper('routemap', function(sinkName, sinkPAIndex) {
+  //This method will calculate a list of possible routes for the sink given, and will also determine if any of them are active or not.	
+	Handlebars.registerHelper('routemap', function(sinkName) {
 		routemap = new Array();
-		possibleRoutes = Sources.find({enabled: true}); 
+		possibleRoutes = Sources.find({}); 
 		possibleRoutes.forEach(function(source) {
-			newRouteVM = new RouteViewModel();
-			newRouteVM.friendlyName = source.name;
-			newRouteVM.notavailable = (source.paIndex == -1) || (sinkPAIndex == -1);	
-			console.log(sinkPAIndex);	
-			newRouteVM.source = source.paName;
-			newRouteVM.sink = sinkName;	
+			newRoute = new Route();
+			//newRouteVM.friendlyName = source.name;
+			newRoute.sourceName = source.sourceName
+			newRoute.sinkName = sinkName;	
 			//For each source, see if we find it in our routes list.
-			route = Routes.findOne({sink: sinkName, source: source.paName})
+			route = Routes.findOne({sinkName: sinkName, sourceName: source.sourceName})
 			if(route)
-			{
-				newRouteVM.active = 1;
-				newRouteVM.index = route.index;
-			}
-			routemap.push(newRouteVM);
+				newRoute.index = route.index;
+			
+			routemap.push(newRoute);
 
   	});
 		return routemap;
 	});
 
-	Handlebars.registerHelper('routestyle', function(index, notavailable) {
-		if(notavailable)
-			return 'notavailable';
-		else if (index > 0)
+	Handlebars.registerHelper('routestyle', function(index) {
+		if (index > 0)
 			return 'active';
 		else
 			return 'inactive';
@@ -53,8 +33,9 @@ if(Meteor.isClient){
 	Template.clientrouteview.events({
 		'click button': function(event) {
 			currentIndex = $(this).attr("index");
+			console.log($(this).attr("sink"));	
 			if(currentIndex < 0)
-				Meteor.call('ActivateRoute',$(this).attr("sink"),$(this).attr("source"));
+				Meteor.call('ActivateRoute',$(this).attr("sinkName"),$(this).attr("sourceName"));
 			else
 				Meteor.call('DeactivateRoute',currentIndex);
 		}
