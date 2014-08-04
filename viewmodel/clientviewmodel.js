@@ -1,19 +1,26 @@
 if(Meteor.isClient){
-	Template.clientview.SinkList = function() {
-		return Sinks.find({});
-	};
 
-  //This method will calculate a list of possible routes for the sink given, and will also determine if any of them are active or not.	
-	Handlebars.registerHelper('routemap', function(sinkName) {
+	var longpress = false, startTime, endTime;
+
+	Template.clientview.SourceList = function() {
+		return Sources.find({});
+	};
+	Template.clientview.SinkList = function() {
+    return Sinks.find({});
+  };
+	Template.clientsourceview.heightclass = function () {
+		return 'height-rows-' + Sources.find({}).count();
+	};
+  //This method will calculate a list of possible routes for the source given, and will also determine if any of them are active or not.	
+	Handlebars.registerHelper('routemap', function(sourceName) {
 		routemap = new Array();
-		possibleRoutes = Sources.find({}); 
-		possibleRoutes.forEach(function(source) {
+		possibleRoutes = Sinks.find({}); 
+		possibleRoutes.forEach(function(sink) {
 			newRoute = new Route();
-			//newRouteVM.friendlyName = source.name;
-			newRoute.sourceName = source.sourceName
-			newRoute.sinkName = sinkName;	
+			newRoute.sourceName = sourceName
+			newRoute.sinkName = sink.sinkName;	
 			//For each source, see if we find it in our routes list.
-			route = Routes.findOne({sinkName: sinkName, sourceName: source.sourceName})
+			route = Routes.findOne({sinkName: sink.sinkName, sourceName: sourceName})
 			if(route)
 				newRoute.index = route.index;
 			
@@ -29,15 +36,34 @@ if(Meteor.isClient){
 		else
 			return 'inactive';
 	});
+	
+Handlebars.registerHelper('routeedit', function(index) {
+	route = Routes.findOne({index: index})
+	return route.editmode;
+});
 
 	Template.clientrouteview.events({
 		'click button': function(event) {
-			currentIndex = $(this).attr("index");
-			console.log($(this).attr("sink"));	
-			if(currentIndex < 0)
-				Meteor.call('ActivateRoute',$(this).attr("sinkName"),$(this).attr("sourceName"));
+			if(!longPress)
+			{
+				currentIndex = $(this).attr("index");
+				console.log($(this).attr("sink"));	
+				if(currentIndex < 0)
+					Meteor.call('ActivateRoute',$(this).attr("sinkName"),$(this).attr("sourceName"));
+				else
+					Meteor.call('DeactivateRoute',currentIndex);
+			}
 			else
-				Meteor.call('DeactivateRoute',currentIndex);
+			{
+				Routes.update({index: $(this).attr("index")},{$set: {editmode: true}});
+			}
+		},
+		'mousedown button': function(event) {
+			startTime = new Date().getTime();
+		},
+		'mouseup button': function(event) {
+			endTime = new Date().getTime();
+			longPress = (endTime - startTime) > 1000;
 		}
 	});	
 }

@@ -3,6 +3,12 @@ This should look a little bit like one channel of a sound board.
 There should be a list of routeviews here to mute/unmute each potential source
 Potentially there could even be a fader rendered down the road which could control the volume of the sink.
 -->
-<template name="clientsinkview">
-    {{sinkName}}
+<template name="clientsourceview">
+			<div class="pure-g {{heightclass}}">
+				{{#each routemap sourceName}}
+      		<div class="pure-u-8-24 route">
+							{{> clientrouteview}}
+					</div>
+    		{{/each}}
+			</div>
 </template>

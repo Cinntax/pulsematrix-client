@@ -1,0 +1,54 @@
+/* CSS declarations go here */
+html,body {
+	background-color:lightgrey;
+	font-family:arial;
+	height:100%;
+	background:url('metal.jpg') repeat fixed top left;
+}
+
+#matrix {
+	height:100%;
+	margin-top:20px;
+}
+
+.route {
+	text-align:center;
+}
+
+.footer {
+	height:10%;
+	padding-top:10px;
+	background:url('footer.jpg') repeat-x;
+}
+
+.height-rows-1 {
+	height: 90%;
+}
+
+.height-rows-2 {
+	height: 45%;
+}
+
+.height-rows-3 {
+	height: 30%;
+}
+
+.height-rows-4 {
+	height: 22%;
+}
+
+.height-rows-more {
+	height: 22%;
+}
+
+#routelist {
+	list-style:none;
+  padding:0px;
+	padding-top:10px;
+  margin:0px;
+	background-color:grey;
+	border-bottom:solid;
+	background:url('darkmetal.png') repeat fixed top left;
+	border-right:solid;
+	border-right-color:#505050;
+}

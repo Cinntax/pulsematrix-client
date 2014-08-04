@@ -1,10 +1,16 @@
 <!--The main client window.  Displays a list of sinks, which have routes within it.
 A sink is like one channel in a mixing board.
--->
+For bootstrap, we need to populate the list ACROSS the screen, not top to bottom.-->
 <template name="clientview">
-	<ul id="sinklist">
-		{{#each SinkList}}
-			<li class="sink">{{> clientsinkview}}</li>
+	<div id="matrix">
+		{{#each SourceList}}
+			{{> clientsourceview}}
 		{{/each}}
-	</ul>
+		<!--Print the footer-->
+		<div class="footer pure-g">
+			{{#each SinkList}}
+				<div class="route pure-u-8-24">{{> clientsinkview}}</div>
+			{{/each}}
+		</div>
+	</div>
 </template>
