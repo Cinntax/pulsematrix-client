@@ -23,9 +23,9 @@ button.active {
 	cursor:pointer;
 	color:#306108;
 	font-family:arial;
-	font-size:15px;
+	font-size:16px;
 	font-weight:bold;
-	padding:6px 24px;
+	padding:6px 10px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #aade7c;
 }
@@ -64,9 +64,9 @@ button.inactive {
 	cursor:pointer;
 	color:#cc8282;
 	font-family:arial;
-	font-size:15px;
+	font-size:16px;
 	font-weight:bold;
-	padding:6px 24px;
+	padding:6px 10px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #810e05;
 }

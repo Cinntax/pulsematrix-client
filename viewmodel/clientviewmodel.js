@@ -1,7 +1,5 @@
 if(Meteor.isClient){
 
-	var longpress = false, startTime, endTime;
-
 	Template.clientview.SourceList = function() {
 		return Sources.find({});
 	};
@@ -37,33 +35,14 @@ if(Meteor.isClient){
 			return 'inactive';
 	});
 	
-Handlebars.registerHelper('routeedit', function(index) {
-	route = Routes.findOne({index: index})
-	return route.editmode;
-});
-
 	Template.clientrouteview.events({
 		'click button': function(event) {
-			if(!longPress)
-			{
 				currentIndex = $(this).attr("index");
 				console.log($(this).attr("sink"));	
 				if(currentIndex < 0)
 					Meteor.call('ActivateRoute',$(this).attr("sinkName"),$(this).attr("sourceName"));
 				else
 					Meteor.call('DeactivateRoute',currentIndex);
-			}
-			else
-			{
-				Routes.update({index: $(this).attr("index")},{$set: {editmode: true}});
-			}
-		},
-		'mousedown button': function(event) {
-			startTime = new Date().getTime();
-		},
-		'mouseup button': function(event) {
-			endTime = new Date().getTime();
-			longPress = (endTime - startTime) > 1000;
 		}
 	});	
 }

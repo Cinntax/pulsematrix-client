@@ -3,11 +3,13 @@ html,body {
 	background-color:lightgrey;
 	font-family:arial;
 	height:100%;
+	overflow:hidden;
 	background:url('metal.jpg') repeat fixed top left;
+	-webkit-text-size-adjust: 100%;
 }
 
 #matrix {
-	height:100%;
+	height: 100%;
 	margin-top:20px;
 }
 

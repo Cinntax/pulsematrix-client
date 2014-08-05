@@ -5,7 +5,7 @@ Routes = new Meteor.Collection('routes');
 
 //When we start up, we're going to refresh our collections from pulseaudio, and then kick off a schedule to do it on an interval.
 if (Meteor.isServer) {
-		Meteor.setInterval(RefreshPA, 50000);
+		Meteor.setInterval(RefreshPA, 600000);
   Meteor.startup(function () {
 			RefreshPA();
   });
