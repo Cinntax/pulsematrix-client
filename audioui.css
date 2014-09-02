@@ -42,15 +42,3 @@ html,body {
 .height-rows-more {
 	height: 22%;
 }
-
-#routelist {
-	list-style:none;
-  padding:0px;
-	padding-top:10px;
-  margin:0px;
-	background-color:grey;
-	border-bottom:solid;
-	background:url('darkmetal.png') repeat fixed top left;
-	border-right:solid;
-	border-right-color:#505050;
-}

@@ -12,16 +12,20 @@ if(Meteor.isClient){
   //This method will calculate a list of possible routes for the source given, and will also determine if any of them are active or not.	
 	Handlebars.registerHelper('routemap', function(sourceName) {
 		routemap = new Array();
+		sourceObj = Sources.findOne({name: sourceName})
+		console.log(sourceObj);
 		possibleRoutes = Sinks.find({}); 
 		possibleRoutes.forEach(function(sink) {
 			newRoute = new Route();
-			newRoute.sourceName = sourceName
-			newRoute.sinkName = sink.sinkName;	
+			newRoute.sourceName = sourceName;
+			newRoute.sinkName = sink.name;
+			newRoute.sourceDisplayName = sourceObj.displayName;	
+
 			//For each source, see if we find it in our routes list.
-			route = Routes.findOne({sinkName: sink.sinkName, sourceName: sourceName})
+			route = Routes.findOne({sinkName: sink.name, sourceName: sourceName})
 			if(route)
 				newRoute.index = route.index;
-			
+		
 			routemap.push(newRoute);
 
   	});
