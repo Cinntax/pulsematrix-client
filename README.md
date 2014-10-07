@@ -1,4 +1,4 @@
-audioui
+pulsematrix-client
 =======
 
 Meteor application to manage pulseaudio.
