@@ -1,4 +1,4 @@
-//Routes will need to be auto-generated whenever the source/sink collections change.
+//represents an audio source.
 Source = function()
 {
 	this.index = -1
