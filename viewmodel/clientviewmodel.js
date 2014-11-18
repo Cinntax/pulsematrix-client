@@ -9,6 +9,24 @@ if(Meteor.isClient){
 	Template.clientsourceview.heightclass = function () {
 		return 'height-rows-' + Sources.find({}).count();
 	};
+	Template.clientsourceview.widthclass = function () {
+		sinkCount = Sinks.find({}).count();
+		if(24 % sinkCount == 0)
+		{
+			return 'pure-u-' + 24 / sinkCount + '-24'
+		}
+		else if(5 % sinkCount == 0)
+		{
+			return 'pure-u-' + 5 / sinkCount + '-5'
+		}
+		else
+		{
+			return 'pure-u-' + (24 - (24 % sinkCount) ) / sinkCount + '-24'
+		}
+	};
+	Template.clientview.widthclass = function () {
+		return Template.clientsourceview.widthclass()
+	};
   //This method will calculate a list of possible routes for the source given, and will also determine if any of them are active or not.	
 	Handlebars.registerHelper('routemap', function(sourceName) {
 		routemap = new Array();
