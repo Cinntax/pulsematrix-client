@@ -1,0 +1,95 @@
+.modal {
+    background-color: #FFF;
+    width: 600px;
+    border: #000 solid 1px;
+    border-radius: 10px;
+    box-shadow: 0 8px 6px -6px black;
+    display: none;
+}
+.modaltitle {
+    padding: 10px 20px 15px 20px;
+    line-height: 18px;
+    font-size: 18px;
+    border-bottom: #CCC solid 1px;
+}
+.modaltext {
+    padding: 0 20px 20px 20px;
+}
+.modalclose {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid white;
+    
+    /*required for proper track sizing in FF*/
+    width: 600px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 600px;
+    height: 15px;
+    background: #ddd;
+    border: solid;
+		border-width:1px;
+		border-color:black;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: solid;
+    height: 48px;
+    width: 48px;
+		border-width:1px;
+		border-color:black;
+    border-radius: 50%;
+    background: #67ce64; 
+    margin-top: -15px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+input[type=range]::-ms-track {
+    width: 600px;
+    height: 15px;
+    
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+    
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+
+    /*remove default tick marks*/
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+    /*border: none;*/
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    background: #67ce64;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
