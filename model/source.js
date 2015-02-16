@@ -4,4 +4,5 @@ Source = function()
 	this.index = -1
 	this.name = 'none';
 	this.displayName = 'none';
+	this.volume = 65536;
 }

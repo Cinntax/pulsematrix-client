@@ -13,4 +13,9 @@ For bootstrap, we need to populate the list ACROSS the screen, not top to bottom
 			{{/each}}
 		</div>
 	</div>
+	<div id="modal" class="modal">
+		{{#with SelectedSource}}
+			{{> modalview}}
+		{{/with}}
+  </div>
 </template>

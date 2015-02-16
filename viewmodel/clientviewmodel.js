@@ -1,13 +1,21 @@
 if(Meteor.isClient){
-
+	var timeoutId = 0;
+  
 	Template.clientview.SourceList = function() {
 		return Sources.find({});
 	};
 	Template.clientview.SinkList = function() {
     return Sinks.find({});
   };
+	Template.clientview.SelectedSource = function() {
+		return Sources.findOne({name: Session.get("selectedSource")})
+	};
+
 	Template.clientsourceview.heightclass = function () {
-		return 'height-rows-' + Sources.find({}).count();
+		if(Sources.find({}).count() < 5)	
+			return 'height-rows-' + Sources.find({}).count();
+		else
+			return 'height-rows-more'
 	};
 	Template.clientsourceview.widthclass = function () {
 		sinkCount = Sinks.find({}).count();
@@ -24,9 +32,11 @@ if(Meteor.isClient){
 			return 'pure-u-' + (24 - (24 % sinkCount) ) / sinkCount + '-24'
 		}
 	};
+
 	Template.clientview.widthclass = function () {
 		return Template.clientsourceview.widthclass()
 	};
+
   //This method will calculate a list of possible routes for the source given, and will also determine if any of them are active or not.	
 	Handlebars.registerHelper('routemap', function(sourceName) {
 		routemap = new Array();
@@ -65,12 +75,36 @@ if(Meteor.isClient){
 					Meteor.call('ActivateRoute',$(this).attr("sinkName"),$(this).attr("sourceName"));
 				else
 					Meteor.call('DeactivateRoute',currentIndex);
+		},
+		'mousedown button': function(event) {
+			Session.set("selectedSource",$(this).attr("sourceName"))
+
+			timeoutId = setTimeout(function() {
+				 Custombox.open({
+         	target: '#modal',
+         	effect: 'contentscale',
+         	width: 600
+    		 });
+			},1000);
+		},
+		'mouseup button': function(event) {
+			clearTimeout(timeoutId);
+		},
+		'mouseleave button': function(event) {
+			clearTimeout(timeoutId);
 		}
 	});	
+
+	Template.modalview.events({
+			'change input[type=range]': function(event){
+				Meteor.call('SetSourceVolume',Session.get("selectedSource"), $("input[type=range]").val());
+			}
+	});
 }
 
 if(Meteor.isServer){
 	Meteor.methods({
 		ActivateRoute: function(sink,source){ActivateRoute(sink,source)},
-		DeactivateRoute: function(index){DeactivateRoute(index);}});
+		DeactivateRoute: function(index){DeactivateRoute(index);},
+		SetSourceVolume: function(source,volume){SetSourceVolume(source,volume)}});
 }
